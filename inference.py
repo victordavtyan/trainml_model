@@ -39,6 +39,12 @@ def parse_args():
         help="number of ddim sampling steps",
     )
     parser.add_argument(
+        "--steed",
+        type=int,
+        default=-100,
+        help="number of ddim sampling steps",
+    )
+    parser.add_argument(
         "--num",
         type=int,
         default=1,
@@ -61,9 +67,11 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    print(args.negative_prompt)
+    if args.seed > -500:
+        generator = torch.Generator("cuda").manual_seed(args.seed)
+    else:
+        generator = torch.Generator("cuda")
     # negative_prompt=negative_pr,
-    generator = torch.Generator("cuda").manual_seed(68781279)
     images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale, generator=generator).images
 
     for i, img in enumerate(images):
