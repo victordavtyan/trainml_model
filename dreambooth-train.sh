@@ -50,7 +50,7 @@ python train_dreambooth.py \
 --with_prior_preservation --prior_loss_weight=1.0 \
 --instance_prompt="${2}" \
 --class_prompt="${1}" \
---resolution=768  \
+--resolution=512  \
 --train_batch_size=1  \
 --sample_batch_size=1 \
 --gradient_accumulation_steps=1 --gradient_checkpointing  \
@@ -61,7 +61,7 @@ python train_dreambooth.py \
 --num_class_images=${IMAGES} \
 --max_train_steps=${STEPS} \
 --checkpointing_steps=$((STEPS+1)) \
---mixed_precision=bf16 \
+--mixed_precision=fp16 \
 --enable_xformers_memory_efficient_attention \
 --prior_generation_precision=bf16 \
 --allow_tf32
