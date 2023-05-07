@@ -42,6 +42,9 @@ ls -al ${TRAINML_DATA_PATH}/instance-data
 echo "listinf data folder: reg"
 ls -al ${TRAINML_DATA_PATH}/regularization-data
 ## Run training
+
+#--enable_xformers_memory_efficient_attention \
+
 python train_dreambooth.py \
 --pretrained_model_name_or_path=${TRAINML_CHECKPOINT_PATH} \
 --instance_data_dir=${TRAINML_DATA_PATH}/instance-data-UID00001 \
@@ -62,6 +65,5 @@ python train_dreambooth.py \
 --max_train_steps=${STEPS} \
 --checkpointing_steps=$((STEPS+1)) \
 --mixed_precision=bf16 \
-#--enable_xformers_memory_efficient_attention \
 --prior_generation_precision=bf16 \
 --allow_tf32
