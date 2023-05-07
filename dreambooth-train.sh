@@ -56,7 +56,7 @@ python train_dreambooth.py \
 --resolution=512  \
 --train_batch_size=1  \
 --sample_batch_size=1 \
---gradient_accumulation_steps=1 --gradient_checkpointing  \
+--gradient_accumulation_steps=2 --gradient_checkpointing  \
 --use_8bit_adam  \
 --learning_rate=1e-06  \
 --lr_scheduler="constant"  \
