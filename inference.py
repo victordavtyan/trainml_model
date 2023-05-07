@@ -39,7 +39,7 @@ def parse_args():
         help="number of ddim sampling steps",
     )
     parser.add_argument(
-        "--steed",
+        "--seed",
         type=int,
         default=-100,
         help="number of ddim sampling steps",
