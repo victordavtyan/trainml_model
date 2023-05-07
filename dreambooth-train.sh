@@ -62,6 +62,6 @@ python train_dreambooth.py \
 --max_train_steps=${STEPS} \
 --checkpointing_steps=$((STEPS+1)) \
 --mixed_precision=bf16 \
---enable_xformers_memory_efficient_attention \
+#--enable_xformers_memory_efficient_attention \
 --prior_generation_precision=bf16 \
 --allow_tf32
