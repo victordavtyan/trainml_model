@@ -49,14 +49,14 @@ python train_dreambooth.py \
 --pretrained_model_name_or_path=${TRAINML_CHECKPOINT_PATH} \
 --instance_data_dir=${TRAINML_DATA_PATH}/instance-data-UID00001 \
 --class_data_dir=${TRAINML_DATA_PATH}/regularization-data-UID00001 \
---output_dir=${TRAINML_OUTPUT_PATH}  \
---with_prior_preservation --prior_loss_weight=1.0 \
+--output_dir=${TRAINML_OUTPUT_PATH} \
+--with_prior_preservation --prior_loss_weight=0.8 \
 --instance_prompt="${2}" \
 --class_prompt="${1}" \
 --resolution=512  \
 --train_batch_size=1  \
 --sample_batch_size=1 \
---gradient_accumulation_steps=2 --gradient_checkpointing  \
+--gradient_accumulation_steps=2 \
 --use_8bit_adam  \
 --learning_rate=1e-06  \
 --lr_scheduler="constant"  \
