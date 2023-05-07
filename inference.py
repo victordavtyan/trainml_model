@@ -26,6 +26,13 @@ def parse_args():
         help="the prompt to render"
     )
     parser.add_argument(
+        "--negative_prompt",
+        type=str,
+        nargs="?",
+        default="",
+        help="negative prompt"
+    )
+    parser.add_argument(
         "--steps",
         type=int,
         default=50,
@@ -56,7 +63,7 @@ if __name__ == "__main__":
     args = parse_args()
     negative_pr = "((cropped image, out of shot, cropped)), (((cropped))), (((out of frame))), cropped hair, cropped face, cropped neck, long necks, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1. 4), text,worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, B&W, logo, Glasses, Watermark, bad artist, blur, blurry, text, b&w, 3d, bad art, poorly drawn, disfigured, deformed, extra limbs, (ugly hands:1. 5), extra fingers, canvas frame, cartoon, 3d, disfigured, bad art, deformed, extra limbs, weird colors, blurry, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, ugly, blurry, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, out of frame, ugly, extra limbs, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck, Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy, 3d render"
     # negative_prompt=negative_pr,
-    images = pipe(args.prompt,  num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
+    images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
 
     for i, img in enumerate(images):
         img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{i}.png")
