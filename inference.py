@@ -67,7 +67,7 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    if args.seed > -100:
+    if args.seed != -100:
         generator = torch.Generator("cuda").manual_seed(args.seed)
     else:
         generator = torch.Generator("cuda")
