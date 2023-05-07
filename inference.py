@@ -61,8 +61,10 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
+    print(args.negative_prompt)
     # negative_prompt=negative_pr,
-    images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
+    generator = torch.Generator("cuda").manual_seed(68781279)
+    images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale, generator=generator).images
 
     for i, img in enumerate(images):
         img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{i}.png")
