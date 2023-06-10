@@ -229,15 +229,16 @@ if __name__ == "__main__":
     ### PROMPTS
 
 
-    prompt1 =f"<lora:more_details:1.5> {args.token},black and red comic book panel, lineart illustration , sharp eyes focus , redhead, athletic body, alone, ((man in plate armor )), (((ultra realistic detailed eyes))), intricate eye details, cute sultry, model shoot pose, ultra skin texture, ((ultra skin details)), intricate details, (in dark sci-fi space ship)"
-    prompt2 = f"<lora:more_details:1.5> highly detailed portrait of {args.token} as old sailor, by Dustin Nguyen, Akihiko Yoshida, Greg Tocchini, Greg Rutkowski,4k resolution, bravely default inspired, vibrant but dreary red, black and white color scheme,epic extreme long shot, dark mood and strong backlighting, volumetric lights, smoke volutes,sharp eyes focus, HQ"
-    prompt3 = f"<lora:more_details:1.5> Portrait of {args.token}, dramatic lighting, illustration by greg rutkowski, yoji shinkawa, 4k, digital art, concept art, trending on artstation"
-    prompt4 = f"<lora:more_details:1.5> poster of {args.token}| centered| key visual| intricate| highly detailed| breathtaking| precise lineart| vibrant| panoramic| cinematic| Carne Griffiths| Conrad Roset"
-    prompt5 = f"<lora:more_details:1.5> zydink, monochrome, ink sketch, 1boy,(middle age man), (facial hair),looking at viewer, long hair,hanfu, chinese clothes, long sleeves, (abstract ink splash:1.2), white background,vdavtyan"
-    prompt6 = f"<lora:more_details:1.5> detailed portrait of {args.token}, Punk boy, Sheen Holographic Futuristic sci-fi fashion cyberpunk,(neotokyo), synthwave,(aesthetics), futuristic, bladerunner movie scene by ismail inceoglu, greg rutkowski, Alexandros Pyromallis, Nekro ,Rene Margitte illustrated, Perfect face,fine details,realistic shaded"
-    prompt7 = f"<lora:more_details:1.5> A psychedelic portrait of {args.token}, vibrant color scheme, highly detailed, in the style of romanticism, cinematic, artstation, Moebius, Greg rutkowski"
-    prompt8 = f"<lora:more_details:1.5> Beautiful anime painting of {args.token}, by tim okamura, victor nizovtsev, greg rutkowski, noah bradley. trending on artstation, 8k, masterpiece, graffiti paint, fine detail, full of color, intricate detail, golden ratio illustration"
-    
+    prompt1 =f"<lora:more_details:1.5> redshift style, painted portrait of {args.token} a paladin, masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by gaston bussiere and alphonse mucha"
+    prompt2 =f"<lora:more_details:1.5> stain glass window of {args.token} as god warrior, light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
+    prompt3 =f"<lora:more_details:1.5> A man made of fire, intricate heat distortion designs, elegant, highly detailed, sharp focus, art by Artgerm and Greg Rutkowski and WLOP,{args.token}"
+    prompt4 =f"<lora:more_details:1.5> neon light sign in design of face|{args.token} as gorgeous god | detailed gorgeous face | precise lineart | intricate | rea listic | studio quality | cinematic | luminescence | character design | concept art | highly detailed | illustration | digital art | digital paintin"
+    prompt5 =f"<lora:more_details:1.5> {args.token},poster of warrior god, standing alone on hill, centered, detailed gorgeous face, anime style, key visual, intricate detail, highly detailed, breathtaking, vibrant, panoramic, cinematic, Carne Griffiths, Conrad Roset, Makoto Shinkai"
+    prompt6 =f"<lora:more_details:1.5> portrait of {args.token} as a rugged 19th century man with mutton chops in a jacket, victorian, concept art, detailed face, fantasy, close up face, highly detailed, cinematic lighting, digital art painting by (greg rutkowski)"
+    prompt7 =f"<lora:more_details:1.5> {args.token}, ((tarot card with intricate detailed frame around the outside)) | side profile of cyberpunk head with large moon in background| cyberpunk | styled in Art Nouveau | insanely detailed | embellishments | high definition | concept art | digital art | vibrant"
+    prompt8 =f"<lora:more_details:1.5> {args.token},comic book panel, lineart illustration , sharp eyes focus , redhead,((man in plate armor )), ((ultra realistic detailed eyes)), intricate eye details, cute smile, sweaty , model shoot pose, ultra skin texture, ((ultra skin details)),skin imperfections, intricate details, (in dark sci-fi space ship)"
+
+
     prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
 
     neg_p = """(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
