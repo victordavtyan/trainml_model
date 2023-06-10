@@ -106,9 +106,9 @@ logger.setLevel(logging.INFO)
 logger.addHandler(logging.StreamHandler(sys.stderr))
 
 model_id = os.environ.get("TRAINML_CHECKPOINT_PATH")
-print ("MODEL SAVE PATH IS:")
-print(os.environ.get('TRAINML_OUTPUT_PATH'))
-
+print (f"MODEL_ID path is: {model_id}")
+data = run(f"ls -al {model_id}",capture_output=True,shell=True)
+print(data.stdout)
 
 
 def parse_args():
@@ -200,8 +200,7 @@ if __name__ == "__main__":
 
     logging.info('Loaded vae, unet, encoder')
 
-    data = run(f"ls -al {model_id}",capture_output=True,shell=True)
-    print(data.stdout)
+
     ### Main pipe
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
         model_id,
