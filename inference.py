@@ -282,4 +282,4 @@ if __name__ == "__main__":
     print ("I GOT TO HERE BEFORE SAVING")
     for img in all_images:
         img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{i}.png")
-        i++
+        i = i+1
