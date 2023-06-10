@@ -15,6 +15,7 @@ mediapipe
 pytorch_lightning
 tabulate
 # diffusers==0.11.1
--e ./diffusers
+diffusers
+#-e ./diffusers
 
 
