@@ -229,14 +229,14 @@ if __name__ == "__main__":
     ### PROMPTS
 
 
-    prompt1 =f"<lora:more_details:1.5> redshift style, painted portrait of {args.token} a paladin, masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by gaston bussiere and alphonse mucha"
+    prompt1 =f"<lora:more_details:1.5> redshift style, painted portrait of {args.token} a paladin, masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
     prompt2 =f"<lora:more_details:1.5> stain glass window of {args.token} as god warrior, light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
     prompt3 =f"<lora:more_details:1.5> A man made of fire, intricate heat distortion designs, elegant, highly detailed, sharp focus, art by Artgerm and Greg Rutkowski and WLOP,{args.token}"
     prompt4 =f"<lora:more_details:1.5> neon light sign in design of face|{args.token} as gorgeous god | detailed gorgeous face | precise lineart | intricate | rea listic | studio quality | cinematic | luminescence | character design | concept art | highly detailed | illustration | digital art | digital paintin"
     prompt5 =f"<lora:more_details:1.5> {args.token},poster of warrior god, standing alone on hill, centered, detailed gorgeous face, anime style, key visual, intricate detail, highly detailed, breathtaking, vibrant, panoramic, cinematic, Carne Griffiths, Conrad Roset, Makoto Shinkai"
     prompt6 =f"<lora:more_details:1.5> portrait of {args.token} as a rugged 19th century man with mutton chops in a jacket, victorian, concept art, detailed face, fantasy, close up face, highly detailed, cinematic lighting, digital art painting by (greg rutkowski)"
     prompt7 =f"<lora:more_details:1.5> {args.token}, ((tarot card with intricate detailed frame around the outside)) | side profile of cyberpunk head with large moon in background| cyberpunk | styled in Art Nouveau | insanely detailed | embellishments | high definition | concept art | digital art | vibrant"
-    prompt8 =f"<lora:more_details:1.5> {args.token},comic book panel, lineart illustration , sharp eyes focus , redhead,((man in plate armor )), ((ultra realistic detailed eyes)), intricate eye details, cute smile, sweaty , model shoot pose, ultra skin texture, ((ultra skin details)),skin imperfections, intricate details, (in dark sci-fi space ship)"
+    prompt8 =f"<lora:more_details:1.5> {args.token},comic book panel, lineart illustration , sharp eyes focus , redhead,((man in plate armor )), ((ultra realistic detailed eyes)), intricate eye details, cute smile, sweaty , ultra skin texture, ((ultra skin details)),intricate details, (in dark sci-fi space ship)"
 
 
     prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
@@ -283,6 +283,7 @@ if __name__ == "__main__":
         i2i_images = i2i_pipe(prompt=prompt_arr[i], negative_prompt=neg_p, num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5).images
         all_images.extend(i2i_images)
     #images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
+    all_images.append(output.images)
     i=0
     print ("I GOT TO HERE BEFORE SAVING")
     for img in all_images:
