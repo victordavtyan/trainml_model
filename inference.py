@@ -178,7 +178,7 @@ if __name__ == "__main__":
 
     lora_model_path = "models/more_details.safetensors"
     use_lora = True
-    lora_alpha = 1.5
+    lora_alpha = 0.75
 
     ### OPENPOSE
     openpose = OpenposeDetector.from_pretrained("lllyasviel/ControlNet")
