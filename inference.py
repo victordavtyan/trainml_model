@@ -185,18 +185,18 @@ if __name__ == "__main__":
     )
     openpose_image = openpose(image)
     ##############
-
+    logging.info('Loaded openpose')
     ### CONTROLNET
     controlnet = ControlNetModel.from_pretrained("lllyasviel/sd-controlnet-openpose", torch_dtype=torch.float16)
-
+    logging.info('Loaded controlnet')
     ### VAE
     vae_to_use = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16)
-
+    logging.info('Loaded vae')
     ### LOAD UNET AND ENCODER
     unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="unet", torch_dtype=torch.float16)
     text_enc = CLIPTextModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="text_encoder", torch_dtype=torch.float16)
 
-    print ("LOG: LOADED MAIN UNER AND ENCODER AND VAE")
+    logging.info('Loaded vae, unet, encoder')
 
     ### Main pipe
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
@@ -208,7 +208,7 @@ if __name__ == "__main__":
         unet=unet_model
     )
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
-
+    logging.info('Loaded main pipeline')
     ### IF LORA IS SET TO LOAD, THEN LOAD
     if use_lora == True:
         pipe = load_lora_weights(pipe, lora_model_path, lora_alpha)
