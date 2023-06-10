@@ -15,7 +15,7 @@ mediapipe
 pytorch_lightning
 tabulate
 # diffusers==0.11.1
-diffusers @ https://github.com/huggingface/diffusers.git
+diffusers @ git+https://github.com/huggingface/diffusers.git
 #-e ./diffusers
 
 
