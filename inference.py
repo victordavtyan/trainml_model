@@ -177,7 +177,7 @@ if __name__ == "__main__":
     sec_checkpoint_version = model_id
 
     lora_model_path = "models/more_details.safetensors"
-    use_lora = True
+    use_lora = False
     lora_alpha = 1.0
 
     ### OPENPOSE
