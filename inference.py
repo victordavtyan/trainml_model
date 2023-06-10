@@ -210,6 +210,7 @@ if __name__ == "__main__":
         text_encoder = text_enc,
         unet=unet_model
     )
+
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     logging.info('Loaded main pipeline')
     ### IF LORA IS SET TO LOAD, THEN LOAD
