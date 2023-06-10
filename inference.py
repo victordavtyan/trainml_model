@@ -196,6 +196,8 @@ if __name__ == "__main__":
     unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="unet", torch_dtype=torch.float16)
     text_enc = CLIPTextModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="text_encoder", torch_dtype=torch.float16)
 
+    print ("LOG: LOADED MAIN UNER AND ENCODER AND VAE")
+
     ### Main pipe
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
         model_id,
@@ -277,6 +279,7 @@ if __name__ == "__main__":
         all_images.extend(i2i_images)
     #images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
     i=0
+    print ("I GOT TO HERE BEFORE SAVING")
     for img in all_images:
         img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{i}.png")
         i++
