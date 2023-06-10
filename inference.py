@@ -279,7 +279,7 @@ if __name__ == "__main__":
     all_images = [] 
     for i in range(len(output.images)):
         #print (prompt_arr[i])
-        i2i_images = i2i_pipe(prompt=prompt_arr[i], negative_prompt=neg_p, num_images_per_prompt=4, image=output.images[i], strength=0.5, guidance_scale=7.5).images
+        i2i_images = i2i_pipe(prompt=prompt_arr[i], negative_prompt=neg_p, num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5).images
         all_images.extend(i2i_images)
     #images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
     i=0
