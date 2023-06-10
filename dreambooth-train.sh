@@ -70,6 +70,6 @@ python train_dreambooth.py \
 --num_class_images=200 \
 --max_train_steps=350 \
 --checkpointing_steps=250 \
---mixed_precision=bf16 \
---prior_generation_precision=bf16 \
+--mixed_precision=fp16 \
+--prior_generation_precision=fp16 \
 --allow_tf32
