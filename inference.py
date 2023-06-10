@@ -7,6 +7,8 @@ from diffusers import StableDiffusionPipeline
 import torch
 
 #####
+from subprocess import run
+
 from safetensors.torch import load_file
 from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
 from diffusers.utils import load_image
@@ -198,6 +200,8 @@ if __name__ == "__main__":
 
     logging.info('Loaded vae, unet, encoder')
 
+    data = run(f"ls -al {model_id}",capture_output=True,shell=True)
+    print(data.stdout)
     ### Main pipe
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
         model_id,
