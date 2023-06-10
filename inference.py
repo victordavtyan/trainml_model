@@ -276,6 +276,7 @@ if __name__ == "__main__":
         i2i_images = i2i_pipe(prompt=prompt_arr[i], negative_prompt=neg_p, num_images_per_prompt=4, image=output.images[i], strength=0.5, guidance_scale=7.5).images
         all_images.extend(i2i_images)
     #images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
-
-    for i, img in enumerate(all_images):
-        img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/{args.uid}_output_{i}.png")
+    i=0
+    for img in all_images:
+        img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{i}.png")
+        i++
