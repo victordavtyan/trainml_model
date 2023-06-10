@@ -4,11 +4,15 @@ for i in "$@"; do
   case $i in
     -s=*|--steps=*)
       STEPS="${i#*=}"
-      shift
+      shift # optional
       ;;
     -i=*|--images=*)
       IMAGES="${i#*=}"
-      shift
+      shift # optional
+      ;;
+    -t=*|--token=*)
+      TOKEN="${i#*=}"
+      shift # optional
       ;;
     -*|--*)
       echo "Unknown option $i"
@@ -50,20 +54,22 @@ python train_dreambooth.py \
 --instance_data_dir=${TRAINML_DATA_PATH}/instance-data-UID00001 \
 --class_data_dir=${TRAINML_DATA_PATH}/regularization-data-UID00001 \
 --output_dir=${TRAINML_OUTPUT_PATH} \
---with_prior_preservation --prior_loss_weight=0.8 \
---instance_prompt="${2}" \
---class_prompt="${1}" \
+--with_prior_preservation --prior_loss_weight=1 \
+--instance_prompt="photo of ${TOKEN} person" \
+--class_prompt="photo of a person" \
 --resolution=512  \
---train_batch_size=1  \
+--train_batch_size=2 \
 --sample_batch_size=1 \
 --gradient_accumulation_steps=2 \
 --use_8bit_adam  \
---learning_rate=1e-06  \
---lr_scheduler="constant"  \
---lr_warmup_steps=0  \
---num_class_images=${IMAGES} \
---max_train_steps=${STEPS} \
---checkpointing_steps=$((STEPS+1)) \
+--seed=123456789 \
+--train_text_encoder \
+--learning_rate=1e-06 \
+--lr_scheduler="constant" \
+--lr_warmup_steps=0 \
+--num_class_images=200 \
+--max_train_steps=350 \
+--checkpointing_steps=250 \
 --mixed_precision=bf16 \
 --prior_generation_precision=bf16 \
 --allow_tf32

@@ -7,5 +7,14 @@ ftfy
 tensorboard
 modelcards
 datasets
+omegaconf
+opencv-contrib-python
+controlnet_aux
+bitsandbytes
+mediapipe
+pytorch_lightning
+tabulate
 # diffusers==0.11.1
 -e ./diffusers
+
+
