@@ -6,7 +6,7 @@ for i in "$@"; do
       STEPS="${i#*=}"
       shift # optional
       ;;
-    -su=*|--uid=*)
+    -s=*|--uid=*)
       UID="${i#*=}"
       shift # optional
       ;;
