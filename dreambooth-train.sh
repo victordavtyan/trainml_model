@@ -7,7 +7,7 @@ for i in "$@"; do
       shift # optional
       ;;
     -s=*|--uid=*)
-      UID="${i#*=}"
+      U_UID="${i#*=}"
       shift # optional
       ;;
     -i=*|--images=*)
@@ -51,7 +51,7 @@ ls -al ${TRAINML_CHECKPOINT_PATH}/
 
 python train_dreambooth.py \
 --pretrained_model_name_or_path=${TRAINML_CHECKPOINT_PATH} \
---instance_data_dir=${TRAINML_DATA_PATH}/instance-data-${UID} \
+--instance_data_dir=${TRAINML_DATA_PATH}/instance-data-${U_UID} \
 --class_data_dir=${TRAINML_DATA_PATH}/regularization-data-men \
 --output_dir=${TRAINML_OUTPUT_PATH} \
 --with_prior_preservation --prior_loss_weight=1 \
