@@ -159,6 +159,11 @@ def parse_args():
     )
     parser.add_argument('--lora', default=False, action='store_true')
     parser.add_argument(
+        "--lora_alpha",
+        type=float,
+        default=1.0
+    )
+    parser.add_argument(
         "--scale",
         type=float,
         default=7.5,
@@ -179,7 +184,7 @@ if __name__ == "__main__":
 
     lora_model_path = "models/more_details.safetensors"
     use_lora = args.lora
-    lora_alpha = 1.0
+    lora_alpha = args.lora_alpha
 
     num_per_prompt = 4
 
