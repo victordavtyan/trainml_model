@@ -252,7 +252,7 @@ if __name__ == "__main__":
         prompt_arr,
         [openpose_image] * 8,
         negative_prompt=[neg_p] * 8,
-        num_images_per_prompt=4,
+        num_images_per_prompt=[4] * 8,
         num_inference_steps=50,
         guidance_scale = 7.5,
         controlnet_conditioning_scale =0.4,
