@@ -258,7 +258,7 @@ if __name__ == "__main__":
         num_inference_steps=50,
         guidance_scale = 7.5,
         controlnet_conditioning_scale =0.4,
-        #generator=generator
+        generator=generator
     )
 
     ### LOAD SECONDARY UNET AND ENCODER 
@@ -279,12 +279,13 @@ if __name__ == "__main__":
     else:
         i2i_pipe.to("cuda")
 
+    i2i_generator = torch.Generator("cuda").manual_seed(seed)
     i=0
     all_images = [] 
     prompt_counter = 0
     for i in range(len(output.images)):
         #print (prompt_arr[i])
-        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p, num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5).images
+        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p, num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5, generator=i2i_generator).images
         all_images.extend(i2i_images)
 
         if (i+1) % num_per_prompt == 0:
