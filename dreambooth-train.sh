@@ -67,7 +67,7 @@ python train_dreambooth.py \
 --learning_rate=1e-06 \
 --lr_scheduler="constant" \
 --lr_warmup_steps=0 \
---num_class_images=200 \
+--num_class_images=196 \
 --max_train_steps=350 \
 --checkpointing_steps=250 \
 --mixed_precision=fp16 \
