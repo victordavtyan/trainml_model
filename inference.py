@@ -237,14 +237,14 @@ if __name__ == "__main__":
     ### PROMPTS
 
 
-    prompt1 =f"redshift style, painted portrait of {args.token} a paladin, masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
-    prompt2 =f"stain glass window of {args.token} as god warrior, light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
-    prompt3 =f"A man made of fire, intricate heat distortion designs, elegant, highly detailed, sharp focus, art by Artgerm and Greg Rutkowski and WLOP,{args.token}"
+    prompt1 =f"redshift style, painted portrait of {args.token} a paladin, 25 year old, youg man, beautiful, masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
+    prompt2 =f"stain glass window of {args.token} as god warrior, 25 year old, youg man, beautiful, light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
+    prompt3 =f"A man made of fire, intricate heat distortion designs, 25 year old, youg man, beautiful, elegant, highly detailed, sharp focus, art by Artgerm and Greg Rutkowski and WLOP,{args.token}"
     prompt4 =f"neon light sign in design of face|{args.token} as gorgeous god | detailed gorgeous face | precise lineart | intricate | rea listic | studio quality | cinematic | luminescence | character design | concept art | highly detailed | illustration | digital art | digital paintin"
-    prompt5 =f"{args.token},poster of warrior god, standing alone on hill, centered, detailed gorgeous face, anime style, key visual, intricate detail, highly detailed, breathtaking, vibrant, panoramic, cinematic, Carne Griffiths, Conrad Roset, Makoto Shinkai"
-    prompt6 =f"portrait of {args.token} as a rugged 19th century man with mutton chops in a jacket, victorian, concept art, detailed face, fantasy, close up face, highly detailed, cinematic lighting, digital art painting by (greg rutkowski)"
+    prompt5 =f"{args.token},poster of warrior god, standing alone on hill, 25 year old, youg man, beautiful, centered, detailed gorgeous face, anime style, key visual, intricate detail, highly detailed, breathtaking, vibrant, panoramic, cinematic, Carne Griffiths, Conrad Roset, Makoto Shinkai"
+    prompt6 =f"portrait of {args.token} as a rugged 19th century man with mutton chops in a jacket, 25 year old, youg man, beautiful, victorian, concept art, detailed face, fantasy, close up face, highly detailed, cinematic lighting, digital art painting by (greg rutkowski)"
     prompt7 =f"{args.token}, ((tarot card with intricate detailed frame around the outside)) | side profile of cyberpunk head with large moon in background| cyberpunk | styled in Art Nouveau | insanely detailed | embellishments | high definition | concept art | digital art | vibrant"
-    prompt8 =f"{args.token},comic book panel, lineart illustration , sharp eyes focus , redhead,((man in plate armor )), ((ultra realistic detailed eyes)), intricate eye details, cute smile, sweaty , ultra skin texture, ((ultra skin details)),intricate details, (in dark sci-fi space ship)"
+    prompt8 =f"{args.token},comic book panel, lineart illustration , 25 year old, youg man, beautiful, sharp eyes focus , redhead,((man in plate armor )), ((ultra realistic detailed eyes)), intricate eye details, cute smile, sweaty , ultra skin texture, ((ultra skin details)),intricate details, (in dark sci-fi space ship)"
 
 
     prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
