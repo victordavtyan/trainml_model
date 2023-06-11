@@ -136,7 +136,7 @@ def parse_args():
     parser.add_argument(
         "--seed",
         type=int,
-        default=-100,
+        default=-1,
         help="number of ddim sampling steps",
     )
     parser.add_argument(
@@ -157,6 +157,7 @@ def parse_args():
         default="nouser",
         help="token",
     )
+    parser.add_argument('--lora', default=False, action='store_true')
     parser.add_argument(
         "--scale",
         type=float,
@@ -177,7 +178,7 @@ if __name__ == "__main__":
     sec_checkpoint_version = model_id
 
     lora_model_path = "models/more_details.safetensors"
-    use_lora = False
+    use_lora = args.lora
     lora_alpha = 1.0
 
     num_per_prompt = 4
