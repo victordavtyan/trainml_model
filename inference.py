@@ -180,6 +180,8 @@ if __name__ == "__main__":
     use_lora = False
     lora_alpha = 1.0
 
+    num_per_prompt = 4
+
     ### OPENPOSE
     openpose = OpenposeDetector.from_pretrained("lllyasviel/ControlNet")
     image = load_image(
@@ -252,7 +254,7 @@ if __name__ == "__main__":
         prompt_arr,
         [openpose_image] * 8,
         negative_prompt=[neg_p] * 8,
-        num_images_per_prompt=[4] * 8,
+        num_images_per_prompt=num_per_prompt,
         num_inference_steps=50,
         guidance_scale = 7.5,
         controlnet_conditioning_scale =0.4,
@@ -279,10 +281,14 @@ if __name__ == "__main__":
 
     i=0
     all_images = [] 
+    prompt_counter = 0
     for i in range(len(output.images)):
         #print (prompt_arr[i])
-        i2i_images = i2i_pipe(prompt=prompt_arr[i], negative_prompt=neg_p, num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5).images
+        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p, num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5).images
         all_images.extend(i2i_images)
+
+        if (i+1) % num_per_prompt == 0:
+            prompt_counter = prompt_counter + 1        
         
     #images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images
     #all_images.append(output.images)
