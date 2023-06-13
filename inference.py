@@ -220,7 +220,7 @@ if __name__ == "__main__":
         unet=unet_model
     )
     
-    pipe.load_textual_inversion("models/FastNegativeV2.pt")
+    #pipe.load_textual_inversion("models/FastNegativeV2.pt")
     logging.info('Loaded textual inversion')
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     logging.info('Loaded main pipeline')
@@ -291,7 +291,7 @@ if __name__ == "__main__":
         text_encoder=u_text_enc
     )
     
-    i2i_pipe.load_textual_inversion("models/FastNegativeV2.pt")
+    #i2i_pipe.load_textual_inversion("models/FastNegativeV2.pt")
 
     if use_lora == True:
         i2i_pipe = load_lora_weights(i2i_pipe, lora_model_path, lora_alpha)
