@@ -219,7 +219,7 @@ if __name__ == "__main__":
         text_encoder = text_enc,
         unet=unet_model
     )
-    if 
+    
     pipe.load_textual_inversion("models/FastNegativeV2.pt")
     logging.info('Loaded textual inversion')
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
