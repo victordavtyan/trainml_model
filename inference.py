@@ -237,9 +237,13 @@ if __name__ == "__main__":
     ### PROMPTS
 
 
-    prompt1 =f"redshift style, painted portrait of {args.token} a paladin,  masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
-    prompt2 =f"stain glass window of {args.token} as god warrior,  light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
-    prompt3 =f"A man made of fire, intricate heat distortion designs,  elegant, highly detailed, sharp focus, art by Artgerm and Greg Rutkowski and WLOP,{args.token}"
+    #prompt1 =f"redshift style, painted portrait of {args.token} a paladin,  masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
+    #prompt2 =f"stain glass window of {args.token} as god warrior,  light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
+    #prompt3 =f"A man made of fire, intricate heat distortion designs,  elegant, highly detailed, sharp focus, art by Artgerm and Greg Rutkowski and WLOP,{args.token}"
+    prompt1 = f"redshift style, painted portrait of {args.token} a paladin,colorfull,masculine, mature, handsome,silver,gold and blue, fantasy armor, intricate, elegant, highly detailed, digital painting,artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
+    promtp2 = f"Portrait of {args.token}, charliebo artstyle, viking warrior,medieval armor, fantasy,elegant,sharp eyes focus,handsome,epic composition,highly detailed, intricate, digital painting, trending on artstation, concept art, smooth, dark, gloomy, realistic, illustration, 8k, 4k, dramatic lighting, d&d"
+    prompt3 = f"{args.token} as a powerful mysterious wizard, casting lightning magic,(blue lightning,flash),detailed clothing, digital painting, fantasy, Surrealist, by Stanley Artgerm Lau and Alphonse Mucha, artstation, highly detailed, sharp focus, stunningly beautiful, dystopian, iridescent gold, cinematic lighting, dark"
+    
     prompt4 =f"neon light sign in design of face|{args.token} as gorgeous god | detailed gorgeous face | precise lineart | intricate | rea listic | studio quality | cinematic | luminescence | character design | concept art | highly detailed | illustration | digital art | digital paintin"
     prompt5 =f"{args.token},poster of warrior god, standing alone on hill,  centered, detailed gorgeous face, anime style, key visual, intricate detail, highly detailed, breathtaking, vibrant, panoramic, cinematic, Carne Griffiths, Conrad Roset, Makoto Shinkai"
     prompt6 =f"portrait of {args.token} as a rugged 19th century man with mutton chops in a jacket,  victorian, concept art, detailed face, fantasy, close up face, highly detailed, cinematic lighting, digital art painting by (greg rutkowski)"
@@ -253,13 +257,17 @@ if __name__ == "__main__":
     low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, 
     dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,
     deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"""
-
+    neg_p1 = "necktie,tie,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    neg_p2 = "tie,horn,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)    
+    neg_p3 = "tie,suit,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    
+    neg_p_arr = [neg_p1,neg_p2,neg_p3,neg_p,neg_p,neg_p,neg_p,neg_p]
     seed=args.seed
     generator = torch.Generator("cuda").manual_seed(seed)
     output = pipe(
         prompt_arr,
         [openpose_image] * 8,
-        negative_prompt=[neg_p] * 8,
+        negative_prompt=neg_p_arr,
         num_images_per_prompt=num_per_prompt,
         num_inference_steps=50,
         guidance_scale = 7.5,
