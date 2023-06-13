@@ -158,6 +158,7 @@ def parse_args():
         help="token",
     )
     parser.add_argument('--lora', default=False, action='store_true')
+    
     parser.add_argument(
         "--lora_alpha",
         type=float,
@@ -218,7 +219,9 @@ if __name__ == "__main__":
         text_encoder = text_enc,
         unet=unet_model
     )
-
+    if 
+    pipe.load_textual_inversion("models/FastNegativeV2.pt")
+    logging.info('Loaded textual inversion')
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     logging.info('Loaded main pipeline')
     ### IF LORA IS SET TO LOAD, THEN LOAD
@@ -238,10 +241,10 @@ if __name__ == "__main__":
 
 
     #prompt1 =f"redshift style, painted portrait of {args.token} a paladin,  masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
-    #prompt2 =f"stain glass window of {args.token} as god warrior,  light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
+    prompt2 =f"stain glass window of {args.token} as god warrior,  light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
     #prompt3 =f"A man made of fire, intricate heat distortion designs,  elegant, highly detailed, sharp focus, art by Artgerm and Greg Rutkowski and WLOP,{args.token}"
     prompt1 = f"redshift style, painted portrait of {args.token} a paladin,colorfull,masculine, mature, handsome,silver,gold and blue, fantasy armor, intricate, elegant, highly detailed, digital painting,artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
-    prompt2 = f"Portrait of {args.token}, charliebo artstyle, viking warrior,medieval armor, fantasy,elegant,sharp eyes focus,handsome,epic composition,highly detailed, intricate, digital painting, trending on artstation, concept art, smooth, dark, gloomy, realistic, illustration, 8k, 4k, dramatic lighting, d&d"
+    #prompt2 = f"Portrait of {args.token}, charliebo artstyle, viking warrior,medieval armor, fantasy,elegant,sharp eyes focus,handsome,epic composition,highly detailed, intricate, digital painting, trending on artstation, concept art, smooth, dark, gloomy, realistic, illustration, 8k, 4k, dramatic lighting, d&d"
     prompt3 = f"{args.token} as a powerful mysterious wizard, casting lightning magic,(blue lightning,flash),detailed clothing, digital painting, fantasy, Surrealist, by Stanley Artgerm Lau and Alphonse Mucha, artstation, highly detailed, sharp focus, stunningly beautiful, dystopian, iridescent gold, cinematic lighting, dark"
     
     prompt4 =f"neon light sign in design of face|{args.token} as gorgeous god | detailed gorgeous face | precise lineart | intricate | rea listic | studio quality | cinematic | luminescence | character design | concept art | highly detailed | illustration | digital art | digital paintin"
@@ -253,13 +256,13 @@ if __name__ == "__main__":
 
     prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
 
-    neg_p = """(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
+    neg_p = """(FastNegativeV2), (deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
     low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, 
     dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,
     deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"""
-    neg_p1 = "necktie,tie,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    neg_p2 = "tie,horn,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"    
-    neg_p3 = "tie,suit,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    neg_p1 = "(FastNegativeV2), necktie,tie,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    neg_p2 = "(FastNegativeV2),tie,horn,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"    
+    neg_p3 = "(FastNegativeV2),tie,suit,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
     
     neg_p_arr = [neg_p1,neg_p2,neg_p3,neg_p,neg_p,neg_p,neg_p,neg_p]
     seed=args.seed
@@ -287,6 +290,8 @@ if __name__ == "__main__":
         unet=u_unet_model,
         text_encoder=u_text_enc
     )
+    
+    i2i_pipe.load_textual_inversion("models/FastNegativeV2.pt")
 
     if use_lora == True:
         i2i_pipe = load_lora_weights(i2i_pipe, lora_model_path, lora_alpha)
