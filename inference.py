@@ -220,7 +220,7 @@ if __name__ == "__main__":
         unet=unet_model
     )
     
-    pipe.load_textual_inversion("models/FastNegativeV2.pt")
+    #pipe.load_textual_inversion("models/FastNegativeV2.pt")
     logging.info('Loaded textual inversion')
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     logging.info('Loaded main pipeline')
@@ -285,7 +285,7 @@ if __name__ == "__main__":
         num_inference_steps=50,
         guidance_scale = 7.5,
         controlnet_conditioning_scale =0.4,
-        generator=generator
+        #generator=generator
     )
 
     ### LOAD SECONDARY UNET AND ENCODER 
@@ -301,7 +301,7 @@ if __name__ == "__main__":
         text_encoder=u_text_enc
     )
     
-    i2i_pipe.load_textual_inversion("models/FastNegativeV2.pt")
+    #i2i_pipe.load_textual_inversion("models/FastNegativeV2.pt")
 
     if use_lora == True:
         i2i_pipe = load_lora_weights(i2i_pipe, lora_model_path, lora_alpha)
@@ -314,7 +314,7 @@ if __name__ == "__main__":
     prompt_counter = 0
     for i in range(len(output.images)):
         #print (prompt_arr[i])
-        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p_arr[prompt_counter], num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5, generator=i2i_generator).images
+        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p_arr[prompt_counter], num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5).images
         all_images.extend(i2i_images)
 
         if (i+1) % num_per_prompt == 0:
