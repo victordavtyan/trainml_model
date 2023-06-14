@@ -183,7 +183,7 @@ if __name__ == "__main__":
     checkpoint_version = "checkpoint-250"
     sec_checkpoint_version = model_id
 
-    lora_model_path = "models/more_details.safetensors"
+    lora_model_path = "models/Elixir.safetensors"
     use_lora = args.lora
     lora_alpha = args.lora_alpha
 
@@ -220,7 +220,7 @@ if __name__ == "__main__":
         unet=unet_model
     )
     
-    #pipe.load_textual_inversion("models/FastNegativeV2.pt")
+    pipe.load_textual_inversion("models/FastNegativeV2.pt")
     logging.info('Loaded textual inversion')
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     logging.info('Loaded main pipeline')
@@ -256,14 +256,14 @@ if __name__ == "__main__":
 
     prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
 
-    neg_p = """(FastNegativeV2), (deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
+    neg_p = """(FastNegativeV2:0.5), (deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
     low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, 
     dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,
     deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"""
-    neg_p1 = "(FastNegativeV2), necktie,tie,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    neg_p2 = "(FastNegativeV2),tie,horn,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"    
-    neg_p3 = "(FastNegativeV2),tie,suit,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    
+    neg_p1 = "(FastNegativeV2:0.5), necktie,tie,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    neg_p2 = "(FastNegativeV2:0.5),tie,horn,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"    
+    neg_p3 = "(FastNegativeV2:0.5),tie,suit,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+
     neg_p_arr = [neg_p1,neg_p2,neg_p3,neg_p,neg_p,neg_p,neg_p,neg_p]
     seed=args.seed
     generator = torch.Generator("cuda").manual_seed(seed)
@@ -291,7 +291,7 @@ if __name__ == "__main__":
         text_encoder=u_text_enc
     )
     
-    #i2i_pipe.load_textual_inversion("models/FastNegativeV2.pt")
+    i2i_pipe.load_textual_inversion("models/FastNegativeV2.pt")
 
     if use_lora == True:
         i2i_pipe = load_lora_weights(i2i_pipe, lora_model_path, lora_alpha)
@@ -304,7 +304,7 @@ if __name__ == "__main__":
     prompt_counter = 0
     for i in range(len(output.images)):
         #print (prompt_arr[i])
-        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p, num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5, generator=i2i_generator).images
+        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p_arr[prompt_counter], num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5, generator=i2i_generator).images
         all_images.extend(i2i_images)
 
         if (i+1) % num_per_prompt == 0:
