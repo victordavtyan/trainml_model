@@ -273,7 +273,7 @@ if __name__ == "__main__":
     neg_p5="frame,suit,mask,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
     neg_p6="text,frame,suit,(deformed iris, deformed pupils :1.4), cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
     
-    neg_p_arr = [neg_p1,neg_p2,neg_p3,neg_4,neg_5,neg_6,neg_p,neg_p]
+    neg_p_arr = [neg_p1,neg_p2,neg_p3,neg_p4,neg_p5,neg_p6,neg_p,neg_p]
 
     seed=args.seed
     generator = torch.Generator("cuda").manual_seed(seed)
