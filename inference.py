@@ -33,6 +33,7 @@ import os
 from diffusers import StableDiffusionImg2ImgPipeline, DPMSolverMultistepScheduler
 
 ###
+import requests
 
 def load_lora_weights(pipeline, checkpoint_path, lora_alpha):
     # load base model
@@ -239,6 +240,24 @@ if __name__ == "__main__":
 
     ### PROMPTS
 
+    api_url = 'https://imaginate.rebit.ai/api/styles-with-prompts'
+    r_params = dict()
+    resp = requests.get(url=api_url, params=r_params)
+    data = resp.json() # Check the JSON Response Content documentation below
+
+    gender = "male"
+    prompt_arr = []
+    prompt_ids = []
+    style_ids = []
+    neg_p_arr = []
+    for style in data['success']['styles']:
+        if style[f"for_{gender}"] == 1:
+            
+            for prompt in style['prompts']:
+                prompt_arr.append(prompt["text"])
+                prompt_ids.append(prompt["id"])
+                neg_p_arr.append(prompt["negative"])
+                style_ids.append(prompt["style_id"])
 
     #prompt1 =f"redshift style, painted portrait of {args.token} a paladin,  masculine, mature, handsome, grey and silver, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
     #prompt2 =f"stain glass window of {args.token} as god warrior,  light shiny through, intricate, elegant, highly detailed, digital painting, sharp focus, realistic, hyperrealistic, cinematic, illustration"
@@ -250,41 +269,41 @@ if __name__ == "__main__":
     #prompt4 =f"neon light sign in design of face|{args.token} as gorgeous god | detailed gorgeous face | precise lineart | intricate | rea listic | studio quality | cinematic | luminescence | character design | concept art | highly detailed | illustration | digital art | digital paintin"
     #prompt5 =f"{args.token},poster of warrior god, standing alone on hill,  centered, detailed gorgeous face, anime style, key visual, intricate detail, highly detailed, breathtaking, vibrant, panoramic, cinematic, Carne Griffiths, Conrad Roset, Makoto Shinkai"
     #prompt6 =f"portrait of {args.token} as a rugged 19th century man with mutton chops in a jacket,  victorian, concept art, detailed face, fantasy, close up face, highly detailed, cinematic lighting, digital art painting by (greg rutkowski)"
-    prompt1=f"redshift style, painted portrait of {args.token} a paladin,colorfull,masculine, mature, handsome,silver,gold and blue, fantasy armor, intricate, elegant, highly detailed, digital painting,artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
-    prompt2=f"Portrait of {args.token}, charliebo artstyle, viking warrior,medieval armor, fantasy,elegant,sharp eyes focus,handsome,epic composition,highly detailed, intricate, digital painting, trending on artstation, concept art, smooth, dark, gloomy, realistic, illustration, 8k, 4k, dramatic lighting, d&d"
-    prompt3=f"{args.token} as a powerful mysterious wizard, casting lightning magic,(blue lightning,flash),detailed clothing, digital painting, fantasy, Surrealist, by Stanley Artgerm Lau and Alphonse Mucha, artstation, highly detailed, sharp focus, stunningly beautiful, dystopian, iridescent gold, cinematic lighting, dark"
-    prompt4=f"beautiful satanic male,necromancer blood king,portrait of {args.token},ritualistic,oil painting, angular features,magician cloak,in style of Greg Rutkowski,blood drops,red and black, illustration, 8k, 4k,dramatic lighting,((dark and gloomy universe)),smoke and shadow, night"
-    prompt5=f"Digital painting of a beautiful man android,{args.token}, cyborg, robotic parts,(sci-fi costume),camo battle armor, studio soft light, rim light, vibrant details, luxurious cyberpunk, (lace), anatomical, facial muscles,ultra detailed, cable electric wires, microchip, elegant, beautiful background, octane render,style of Stephen Hickman"
-    prompt6=f"poster of a god, portrait of {args.token} with hyperdimensional totem implants,neon arnaments, bio luminescent, water, plasma, creature,turquoise and violet, artwork by tooth wu and wlop and android jones and greg rutkowski"
-    prompt7 =f"{args.token}, ((tarot card with intricate detailed frame around the outside)) | side profile of cyberpunk head with large moon in background| cyberpunk | styled in Art Nouveau | insanely detailed | embellishments | high definition | concept art | digital art | vibrant"
-    prompt8 =f"{args.token}, comic book panel, lineart illustration ,  sharp eyes focus , redhead,((man in plate armor )), ((ultra realistic detailed eyes)), intricate eye details, cute smile, sweaty , ultra skin texture, ((ultra skin details)),intricate details, (in dark sci-fi space ship)"
+    #prompt1=f"redshift style, painted portrait of {args.token} a paladin,colorfull,masculine, mature, handsome,silver,gold and blue, fantasy armor, intricate, elegant, highly detailed, digital painting,artstation, concept art, smooth, sharp focus, illustration, gaston bussiere, alphonse mucha"
+    #prompt2=f"Portrait of {args.token}, charliebo artstyle, viking warrior,medieval armor, fantasy,elegant,sharp eyes focus,handsome,epic composition,highly detailed, intricate, digital painting, trending on artstation, concept art, smooth, dark, gloomy, realistic, illustration, 8k, 4k, dramatic lighting, d&d"
+    #prompt3=f"{args.token} as a powerful mysterious wizard, casting lightning magic,(blue lightning,flash),detailed clothing, digital painting, fantasy, Surrealist, by Stanley Artgerm Lau and Alphonse Mucha, artstation, highly detailed, sharp focus, stunningly beautiful, dystopian, iridescent gold, cinematic lighting, dark"
+    #prompt4=f"beautiful satanic male,necromancer blood king,portrait of {args.token},ritualistic,oil painting, angular features,magician cloak,in style of Greg Rutkowski,blood drops,red and black, illustration, 8k, 4k,dramatic lighting,((dark and gloomy universe)),smoke and shadow, night"
+    #prompt5=f"Digital painting of a beautiful man android,{args.token}, cyborg, robotic parts,(sci-fi costume),camo battle armor, studio soft light, rim light, vibrant details, luxurious cyberpunk, (lace), anatomical, facial muscles,ultra detailed, cable electric wires, microchip, elegant, beautiful background, octane render,style of Stephen Hickman"
+    #prompt6=f"poster of a god, portrait of {args.token} with hyperdimensional totem implants,neon arnaments, bio luminescent, water, plasma, creature,turquoise and violet, artwork by tooth wu and wlop and android jones and greg rutkowski"
+    #prompt7 =f"{args.token}, ((tarot card with intricate detailed frame around the outside)) | side profile of cyberpunk head with large moon in background| cyberpunk | styled in Art Nouveau | insanely detailed | embellishments | high definition | concept art | digital art | vibrant"
+    #prompt8 =f"{args.token}, comic book panel, lineart illustration ,  sharp eyes focus , redhead,((man in plate armor )), ((ultra realistic detailed eyes)), intricate eye details, cute smile, sweaty , ultra skin texture, ((ultra skin details)),intricate details, (in dark sci-fi space ship)"
 
 
-    prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
+    #prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
 
-    neg_p = """(FastNegativeV2:0.5), (deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
-    low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, 
-    dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,
-    deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"""
-    neg_p1="necktie,tie,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    neg_p2="tie,horn,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    neg_p3="tie,suit,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    neg_p4="frame,suit,horns(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    neg_p5="frame,suit,mask,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
-    neg_p6="text,frame,suit,(deformed iris, deformed pupils :1.4), cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    #neg_p = """(FastNegativeV2:0.5), (deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
+    #low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, 
+    #dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,
+    #deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"""
+    #neg_p1="necktie,tie,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    #neg_p2="tie,horn,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    #neg_p3="tie,suit,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    #neg_p4="frame,suit,horns(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    #neg_p5="frame,suit,mask,(deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
+    #neg_p6="text,frame,suit,(deformed iris, deformed pupils :1.4), cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,deformed skin,(robot eyes, bad eyes, crosseyed, small eyes:1.3)"
     
-    neg_p_arr = [neg_p1,neg_p2,neg_p3,neg_p4,neg_p5,neg_p6,neg_p,neg_p]
+    #neg_p_arr = [neg_p1,neg_p2,neg_p3,neg_p4,neg_p5,neg_p6,neg_p,neg_p]
 
     seed=args.seed
     generator = torch.Generator("cuda").manual_seed(seed)
     output = pipe(
         prompt_arr,
-        [openpose_image] * 8,
+        [openpose_image] * len(prompt_arr),
         negative_prompt=neg_p_arr,
         num_images_per_prompt=num_per_prompt,
         num_inference_steps=50,
         guidance_scale = 7.5,
-        controlnet_conditioning_scale =0.4,
+        controlnet_conditioning_scale=0.4,
         generator=generator
     )
 
@@ -324,7 +343,16 @@ if __name__ == "__main__":
     #all_images.append(output.images)
     all_images.extend(output.images)
     i=0
+    prompt_counter = 0
     print ("I GOT TO HERE BEFORE SAVING")
     for img in all_images:
-        img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{i}.png")
+
+        prompt_id = prompt_ids[prompt_counter]
+        style_id = style_ids[prompt_counter]
+          
+        img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{style_id}_{prompt_id}.png")
+    
+        if (i+1) % num_per_prompt == 0:
+            prompt_counter = prompt_counter + 1    
+        
         i = i+1

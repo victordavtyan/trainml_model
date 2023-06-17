@@ -1,4 +1,5 @@
 accelerate>=0.16.0
+requests
 torchvision
 Jinja2
 torchvision
