@@ -342,7 +342,7 @@ if __name__ == "__main__":
         
     #images = pipe(args.prompt, negative_prompt = args.negative_prompt, num_images_per_prompt=args.num, num_inference_steps=args.steps, guidance_scale=args.scale).images , generator=i2i_generator
     #all_images.append(output.images)
-    all_images.extend(output.images)
+    #all_images.extend(output.images)
     i=0
     prompt_counter = 0
     
