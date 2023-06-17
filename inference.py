@@ -184,7 +184,7 @@ if __name__ == "__main__":
     checkpoint_version = "checkpoint-250"
     sec_checkpoint_version = model_id
 
-    lora_model_path = "models/Elixir.safetensors"
+    lora_model_path = "models/more_details.safetensors"
     use_lora = args.lora
     lora_alpha = args.lora_alpha
 
