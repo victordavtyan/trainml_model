@@ -223,7 +223,7 @@ if __name__ == "__main__":
     
     #pipe.load_textual_inversion("models/FastNegativeV2.pt")
     logging.info('Loaded textual inversion') # UniPCMultistepScheduler
-    pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
+    pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
     logging.info('Loaded main pipeline')
     ### IF LORA IS SET TO LOAD, THEN LOAD
     if use_lora == True:
@@ -314,7 +314,7 @@ if __name__ == "__main__":
 
     i2i_pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
         model_id,
-        scheduler = EulerAncestralDiscreteScheduler.from_pretrained(model_id, subfolder="scheduler"),
+        scheduler = DPMSolverMultistepScheduler.from_pretrained(model_id, subfolder="scheduler"),
         torch_dtype=torch.float16,
         vae=vae_to_use,
         unet=u_unet_model,
