@@ -351,7 +351,7 @@ if __name__ == "__main__":
         prompt_id = prompt_ids[prompt_counter]
         style_id = style_ids[prompt_counter]
           
-        img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{style_id}_{prompt_id}.png")
+        img.save(f"{os.environ.get('TRAINML_OUTPUT_PATH')}/output_{style_id}_{prompt_id}_{i}.png")
     
         if (i+1) % num_per_prompt == 0:
             prompt_counter = prompt_counter + 1    
