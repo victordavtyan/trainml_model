@@ -254,7 +254,7 @@ if __name__ == "__main__":
         if style[f"for_{gender}"] == 1:
             
             for prompt in style['prompts']:
-                prompt_arr.append(prompt["text"])
+                prompt_arr.append(prompt["text"].replace("{args.token}", f"{args.token}"))
                 prompt_ids.append(prompt["id"])
                 neg_p_arr.append(prompt["negative"])
                 style_ids.append(prompt["style_id"])
