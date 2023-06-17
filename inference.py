@@ -280,7 +280,7 @@ if __name__ == "__main__":
 
 
     #prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
-
+    print(prompt_arr)
     #neg_p = """(FastNegativeV2:0.5), (deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
     #low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, 
     #dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,
