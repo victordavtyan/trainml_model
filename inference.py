@@ -222,8 +222,8 @@ if __name__ == "__main__":
     )
     
     #pipe.load_textual_inversion("models/FastNegativeV2.pt")
-    logging.info('Loaded textual inversion')
-    pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
+    logging.info('Loaded textual inversion') # UniPCMultistepScheduler
+    pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
     logging.info('Loaded main pipeline')
     ### IF LORA IS SET TO LOAD, THEN LOAD
     if use_lora == True:
