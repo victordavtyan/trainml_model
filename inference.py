@@ -344,7 +344,7 @@ if __name__ == "__main__":
     all_images.extend(output.images)
     i=0
     prompt_counter = 0
-    print ("I GOT TO HERE BEFORE SAVING")
+    
     for img in all_images:
 
         prompt_id = prompt_ids[prompt_counter]
