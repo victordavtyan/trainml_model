@@ -63,7 +63,7 @@ python train_dreambooth.py \
 --gradient_accumulation_steps=2 \
 --use_8bit_adam  \
 --train_text_encoder \
---learning_rate=2e-06 \
+--learning_rate=0.75e-06 \
 --lr_scheduler="constant" \
 --lr_warmup_steps=0 \
 --num_class_images=196 \
