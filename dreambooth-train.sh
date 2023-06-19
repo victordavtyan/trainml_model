@@ -62,9 +62,8 @@ python train_dreambooth.py \
 --sample_batch_size=1 \
 --gradient_accumulation_steps=2 \
 --use_8bit_adam  \
---seed=123456789 \
 --train_text_encoder \
---learning_rate=1e-06 \
+--learning_rate=2e-06 \
 --lr_scheduler="constant" \
 --lr_warmup_steps=0 \
 --num_class_images=196 \
@@ -73,3 +72,4 @@ python train_dreambooth.py \
 --mixed_precision=fp16 \
 --prior_generation_precision=fp16 \
 --allow_tf32
+#--seed=123456789 \
