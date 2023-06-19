@@ -280,8 +280,8 @@ if __name__ == "__main__":
 
 
     #prompt_arr = [prompt1,prompt2,prompt3,prompt4,prompt5,prompt6,prompt7, prompt8]
-    print(prompt_ids)
-    print(style_ids)
+    #print(prompt_ids)
+    #print(style_ids)
     #neg_p = """(FastNegativeV2:0.5), (deformed iris, deformed pupils :1.4),text, cropped, out of frame, worst quality, 
     #low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated,poorly drawn face, mutation, deformed, blurry, 
     #dehydrated, bad anatomy, bad proportions,cloned face, disfigured, gross proportions, malformed limbs,long neck,
@@ -297,16 +297,27 @@ if __name__ == "__main__":
 
     seed=args.seed
     generator = torch.Generator("cuda").manual_seed(seed)
-    output = pipe(
-        prompt_arr,
-        [openpose_image] * len(prompt_arr),
-        negative_prompt=neg_p_arr,
-        num_images_per_prompt=num_per_prompt,
-        num_inference_steps=50,
-        guidance_scale = 7.5,
-        controlnet_conditioning_scale=0.4,
-    #    generator=generator
-    )
+    output_images = []
+
+    n = 7 
+    prompt_chunks = [prompt_arr[i * n:(i + 1) * n] for i in range((len(prompt_arr) + n - 1) // n )] 
+    negp_chunks = [neg_p_arr[i * n:(i + 1) * n] for i in range((len(neg_p_arr) + n - 1) // n )] 
+
+    i=0
+    for prompt_chunk in prompt_chunks:
+
+        output = pipe(
+            prompt_chunk,
+            [openpose_image] * len(prompt_chunk),
+            negative_prompt=negp_chunks[i],
+            num_images_per_prompt=num_per_prompt,
+            num_inference_steps=50,
+            guidance_scale = 7.5,
+            controlnet_conditioning_scale=0.4,
+        #    generator=generator
+        )
+        i=i+1
+        output_images.extend(output.images)
 
     ### LOAD SECONDARY UNET AND ENCODER 
     u_unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}", subfolder="unet", torch_dtype=torch.float16)
@@ -332,9 +343,9 @@ if __name__ == "__main__":
     i=0
     all_images = [] 
     prompt_counter = 0
-    for i in range(len(output.images)):
+    for i in range(len(output_images)):
         #print (prompt_arr[i])
-        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p_arr[prompt_counter], num_images_per_prompt=1, image=output.images[i], strength=0.5, guidance_scale=7.5).images
+        i2i_images = i2i_pipe(prompt=prompt_arr[prompt_counter], negative_prompt=neg_p_arr[prompt_counter], num_images_per_prompt=1, image=output_images[i], strength=0.5, guidance_scale=7.5).images
         all_images.extend(i2i_images)
 
         if (i+1) % num_per_prompt == 0:
