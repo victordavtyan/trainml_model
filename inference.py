@@ -299,7 +299,7 @@ if __name__ == "__main__":
     generator = torch.Generator("cuda").manual_seed(seed)
     output_images = []
 
-    n = 7 
+    n = 5 
     prompt_chunks = [prompt_arr[i * n:(i + 1) * n] for i in range((len(prompt_arr) + n - 1) // n )] 
     negp_chunks = [neg_p_arr[i * n:(i + 1) * n] for i in range((len(neg_p_arr) + n - 1) // n )] 
 
@@ -318,6 +318,7 @@ if __name__ == "__main__":
         )
         i=i+1
         output_images.extend(output.images)
+        torch.cuda.empty_cache()
 
     ### LOAD SECONDARY UNET AND ENCODER 
     u_unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}", subfolder="unet", torch_dtype=torch.float16)
