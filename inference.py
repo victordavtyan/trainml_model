@@ -158,6 +158,12 @@ def parse_args():
         default="nouser",
         help="token",
     )
+    parser.add_argument(
+        "--gender",
+        type=str,
+        default="women",
+        help="gender",
+    )
     parser.add_argument('--lora', default=False, action='store_true')
     
     parser.add_argument(
@@ -187,6 +193,11 @@ if __name__ == "__main__":
     lora_model_path = "models/more_details.safetensors"
     use_lora = args.lora
     lora_alpha = args.lora_alpha
+
+    if args.gender == "women":
+        gender = "female"
+    else:
+        gender = "male"
 
     num_per_prompt = 4
 
@@ -244,7 +255,7 @@ if __name__ == "__main__":
     resp = requests.get(url=api_url, params=r_params)
     data = resp.json() # Check the JSON Response Content documentation below
 
-    gender = "male"
+    
     prompt_arr = []
     prompt_ids = []
     style_ids = []
