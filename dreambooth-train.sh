@@ -14,7 +14,7 @@ for i in "$@"; do
       IMAGES="${i#*=}"
       shift # optional
       ;;
-    -t=*|--token=*)
+    -g=*|--gender=*)
       GENDER="${i#*=}"
       shift # optional
       ;;
