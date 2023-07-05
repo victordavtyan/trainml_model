@@ -18,6 +18,10 @@ for i in "$@"; do
       GENDER="${i#*=}"
       shift # optional
       ;;
+    -m=*|--model_id=*)
+      MODEL_ID="${i#*=}"
+      shift # optional
+      ;;
     -t=*|--token=*)
       TOKEN="${i#*=}"
       shift # optional
@@ -55,7 +59,7 @@ ls -al ${TRAINML_CHECKPOINT_PATH}/
 
 python train_dreambooth.py \
 --pretrained_model_name_or_path=${TRAINML_CHECKPOINT_PATH} \
---instance_data_dir=${TRAINML_DATA_PATH}/instance-data-${U_UID} \
+--instance_data_dir=${TRAINML_DATA_PATH}/instance-data-${U_UID}_${MODEL_ID} \
 --class_data_dir=${TRAINML_DATA_PATH}/regularization-data-${GENDER} \
 --output_dir=${TRAINML_OUTPUT_PATH} \
 --with_prior_preservation --prior_loss_weight=1 \
