@@ -187,7 +187,7 @@ if __name__ == "__main__":
     #else:
     #    generator = torch.Generator("cuda")
     # negative_prompt=negative_pr,
-    checkpoint_version = "checkpoint-350"
+    checkpoint_version = "checkpoint-250"
     #checkpoint_version = model_id
     sec_checkpoint_version = model_id
 
