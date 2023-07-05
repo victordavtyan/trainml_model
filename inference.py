@@ -187,8 +187,8 @@ if __name__ == "__main__":
     #else:
     #    generator = torch.Generator("cuda")
     # negative_prompt=negative_pr,
-    #checkpoint_version = "checkpoint-250"
-    checkpoint_version = model_id
+    checkpoint_version = "checkpoint-350"
+    #checkpoint_version = model_id
     sec_checkpoint_version = model_id
 
     lora_model_path = "models/more_details.safetensors"
@@ -217,11 +217,11 @@ if __name__ == "__main__":
     vae_to_use = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16)
     logging.info('Loaded vae')
     ### LOAD UNET AND ENCODER
-    #unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="unet", torch_dtype=torch.float16)
-    #text_enc = CLIPTextModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="text_encoder", torch_dtype=torch.float16)
+    unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="unet", torch_dtype=torch.float16)
+    text_enc = CLIPTextModel.from_pretrained(f"{model_id}/{checkpoint_version}/", subfolder="text_encoder", torch_dtype=torch.float16)
 
-    unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}", subfolder="unet", torch_dtype=torch.float16)
-    text_enc = CLIPTextModel.from_pretrained(f"{model_id}", subfolder="text_encoder", torch_dtype=torch.float16)
+    #unet_model = UNet2DConditionModel.from_pretrained(f"{model_id}", subfolder="unet", torch_dtype=torch.float16)
+    #text_enc = CLIPTextModel.from_pretrained(f"{model_id}", subfolder="text_encoder", torch_dtype=torch.float16)
 
 
     logging.info('Loaded vae, unet, encoder')

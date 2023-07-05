@@ -76,8 +76,8 @@ python train_dreambooth.py \
 --lr_scheduler="constant" \
 --lr_warmup_steps=0 \
 --num_class_images=196 \
---max_train_steps=350 \
---checkpointing_steps=250 \
+--max_train_steps=450 \
+--checkpointing_steps=350 \
 --mixed_precision=fp16 \
 --prior_generation_precision=fp16 \
 --allow_tf32
