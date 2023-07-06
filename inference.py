@@ -207,8 +207,7 @@ if __name__ == "__main__":
     ### OPENPOSE
     openpose = OpenposeDetector.from_pretrained("lllyasviel/ControlNet")
     image = load_image(
-        "https://cdni.pornpics.de/1280/7/658/55471282/55471282_012_9cff.jpg"
-    #    "data/pose/output_8.png"
+        "data/pose/output_8.png"
     )
     openpose_image = openpose(image)
     ##############
@@ -253,7 +252,7 @@ if __name__ == "__main__":
 
     ### DISA
     
-    pipe.safety_checker = dummy
+    #pipe.safety_checker = dummy
 
     ### PROMPTS
 
@@ -358,7 +357,7 @@ if __name__ == "__main__":
     else:
         i2i_pipe.to("cuda")
 
-    i2i_pipe.safety_checker = dummy
+    #i2i_pipe.safety_checker = dummy
 
     i2i_generator = torch.Generator("cuda").manual_seed(seed)
     i=0
