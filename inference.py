@@ -111,7 +111,9 @@ print (f"MODEL_ID path is: {model_id}")
 data = run(f"ls -al {model_id}",capture_output=True,shell=True)
 print(data.stdout)
 
-
+def dummy(images, **kwargs):
+        return images, len(images)*False
+        
 def parse_args():
     parser = argparse.ArgumentParser(description="Simple example of a custom model prompt generation.")
     parser.add_argument(
@@ -249,9 +251,8 @@ if __name__ == "__main__":
     #pipe.enable_model_cpu_offload()
 
     ### DISA
-    #def dummy(images, **kwargs):
-    #    return images, False
-    #pipe.safety_checker = dummy
+    
+    pipe.safety_checker = dummy
 
     ### PROMPTS
 
@@ -355,6 +356,8 @@ if __name__ == "__main__":
         i2i_pipe = load_lora_weights(i2i_pipe, lora_model_path, lora_alpha)
     else:
         i2i_pipe.to("cuda")
+
+    i2i_pipe.safety_checker = dummy
 
     i2i_generator = torch.Generator("cuda").manual_seed(seed)
     i=0
