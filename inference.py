@@ -113,7 +113,7 @@ print(data.stdout)
 
 def dummy(images, **kwargs):
         return images, len(images)*False
-        
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Simple example of a custom model prompt generation.")
     parser.add_argument(
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     #else:
     #    generator = torch.Generator("cuda")
     # negative_prompt=negative_pr,
-    checkpoint_version = "checkpoint-250"
+    checkpoint_version = "checkpoint-350"
     #checkpoint_version = model_id
     sec_checkpoint_version = model_id
 
