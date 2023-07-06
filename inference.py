@@ -112,7 +112,7 @@ data = run(f"ls -al {model_id}",capture_output=True,shell=True)
 print(data.stdout)
 
 def dummy(images, **kwargs):
-        return images, len(images)*False
+        return images, len(images)*[False]
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Simple example of a custom model prompt generation.")
