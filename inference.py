@@ -207,7 +207,8 @@ if __name__ == "__main__":
     ### OPENPOSE
     openpose = OpenposeDetector.from_pretrained("lllyasviel/ControlNet")
     image = load_image(
-        "data/pose/output_8.png"
+        "https://cdn.pornpen.ai/e92d4f73-a799-4c88-9c00-5978f8031506.jpg"
+    #    "data/pose/output_8.png"
     )
     openpose_image = openpose(image)
     ##############
