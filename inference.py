@@ -207,8 +207,7 @@ if __name__ == "__main__":
     ### OPENPOSE
     openpose = OpenposeDetector.from_pretrained("lllyasviel/ControlNet")
     image = load_image(
-        "https://cdni.pornpics.de/1280/7/658/55471282/55471282_012_9cff.jpg"
-    #    "data/pose/output_8.png"
+        "data/pose/output_8.png"
     )
     openpose_image = openpose(image)
     ##############
